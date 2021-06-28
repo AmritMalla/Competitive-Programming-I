@@ -2,7 +2,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class ExitPointOfMatrix {
     
     public static void print(int i, int j){
         System.out.println(i);
