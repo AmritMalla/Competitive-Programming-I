@@ -1,4 +1,14 @@
-Stack<Integer> opnds = new Stack<>();
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String exp = br.readLine();
+
+        Stack<Integer> opnds = new Stack<>();
         Stack<Character> optors = new Stack<>();
 
         for(int i = 0;i<exp.length();i++){
@@ -55,3 +65,4 @@ Stack<Integer> opnds = new Stack<>();
         }
         return 0;
     }
+}
