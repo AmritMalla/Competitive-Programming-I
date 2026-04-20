@@ -1,20 +1,167 @@
-# Queue Implementations and Adapter Patterns
+# Queue Problems
 
-## Queue Implementations
+This directory contains implementations of **Queue** data structure and related problems in Java.
 
-A queue is a linear data structure that follows a First In First Out (FIFO) order. Elements are added at the back of the queue and removed from the front. Here are a few common implementations of a queue:
+## 📋 Table of Contents
 
-1. **Array-based Queue**: Uses a fixed-size array to store elements. It requires management of the front and rear indices to keep track of the current positions.
-2. **Linked List-based Queue**: Uses a linked list where nodes are created for each element. This allows dynamic resizing and efficient memory usage.
-3. **Circular Queue**: A circular structure that connects the end of the array back to the front. This helps in utilizing spaces that become available when elements are dequeued.
+- [Overview](#overview)
+- [Problem List](#problem-list)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
 
-## Queue/Stack Adapter Patterns
+---
 
-Sometimes, we need to implement a stack using a queue or vice versa. These patterns allow developers to adapt one data structure to behave like another. Here's a brief overview:
+## Overview
 
-- **Queue as Stack**: By using two queues, you can emulate stack operations. One queue is used for storing the elements, and the other is used for reversing the order upon popping an item.
-- **Stack as Queue**: By using two stacks, you can achieve queue operations. When enqueuing, push the element onto the first stack; when dequeuing, pop all elements from the first stack and push them into the second stack before popping from the second stack.
+A **Queue** is a linear data structure that follows the **FIFO (First In First Out)** principle. Elements are added at the rear (enqueue) and removed from the front (dequeue). Queues are essential for BFS, scheduling, and buffering applications.
 
-## Conclusion
+**Key Operations:**
+- `add()/enqueue()`: Add element to rear - O(1)
+- `remove()/dequeue()`: Remove element from front - O(1)
+- `peek()`: View front element - O(1)
+- `isEmpty()`: Check if queue is empty - O(1)
 
-Understanding queue implementations and their adaptations to stacks can broaden the efficiency and flexibility of coding solutions. Incorporating these patterns can also enhance the performance of algorithms that require specific data structures.
+---
+
+## 📁 Problem List
+
+### Queue Implementation
+
+| # | File Name | Description | Time Complexity | Space Complexity |
+|---|-----------|-------------|-----------------|------------------|
+| 1 | `Queue.java` | Basic queue implementation using array | O(1) | O(n) |
+| 2 | `DynamicQueue.java` | Queue with automatic resizing capability | O(1)* | O(n) |
+
+### Stack Using Queue
+
+| # | File Name | Description | Time Complexity | Space Complexity |
+|---|-----------|-------------|-----------------|------------------|
+| 3 | `StackFromQueuePopEfficient.java` | Implement stack using queues (pop O(1)) | O(1)* | O(n) |
+| 4 | `StackFromQueuePushEfficient.java` | Implement stack using queues (push O(1)) | O(1)* | O(n) |
+
+**Legend:**
+- n = number of elements
+- *Amortized time complexity
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Java Development Kit (JDK) 8 or higher
+- Command line terminal
+
+### Compilation
+```bash
+cd queue
+javac *.java
+```
+
+### Running a Specific Problem
+```bash
+java Queue
+```
+
+---
+
+## 💡 Usage
+
+### Example - Basic Queue
+```
+Operations: add(1), add(2), add(3), peek(), remove(), peek()
+Output:
+Front: 1
+Removed: 1
+New Front: 2
+```
+
+### Example - DynamicQueue
+```
+Operations: add multiple elements beyond initial capacity
+Output:
+Queue automatically resizes and maintains all elements
+```
+
+### Example - Stack From Queue (Pop Efficient)
+```
+Operations: push(10), push(20), push(30), pop(), pop()
+Output:
+Popped: 30
+Popped: 20
+```
+
+### Example - Stack From Queue (Push Efficient)
+```
+Operations: push(5), push(15), push(25), pop()
+Output:
+Popped: 25
+```
+
+---
+
+## 📊 Algorithm Details
+
+### 1. Basic Queue Implementation
+**Array-Based Approach:**
+- Use circular array to avoid shifting
+- Track front and rear indices
+- Handle wraparound using modulo operator
+
+```java
+// Circular queue logic
+rear = (rear + 1) % capacity
+front = (front + 1) % capacity
+```
+
+### 2. Dynamic Queue
+**Resizing Strategy:**
+- Double capacity when full
+- Create new array and copy elements
+- Reset front to 0, rear to size-1
+
+**Amortized Analysis:**
+- Most operations: O(1)
+- Resize operation: O(n) but rare
+- Amortized cost: O(1)
+
+### 3. Stack Using Queue (Pop Efficient)
+**Strategy:**
+- Maintain two queues
+- For push: O(n) - rotate elements to maintain order
+- For pop: O(1) - simply dequeue
+
+**Push Operation:**
+1. Enqueue to q2
+2. Move all elements from q1 to q2
+3. Swap q1 and q2 references
+
+### 4. Stack Using Queue (Push Efficient)
+**Strategy:**
+- Maintain two queues
+- For push: O(1) - simply enqueue
+- For pop: O(n) - move n-1 elements first
+
+**Pop Operation:**
+1. Move n-1 elements from q1 to q2
+2. Dequeue last element from q1
+3. Swap q1 and q2 references
+
+---
+
+## 🔗 Related Topics
+
+- [Stack](../stack/) - Complementary LIFO structure
+- [Graph](../graph/) - BFS uses queue
+- [Heap](../heap/) - Priority queue variations
+
+---
+
+## 📝 Notes
+
+- Queue is fundamental to BFS and level-order traversal
+- Circular queue optimizes space usage in fixed-size implementation
+- Two-queue stack gives O(1) for one operation, O(n) for other
+- Java's `LinkedList` implements `Queue` interface
+- `ArrayDeque` is often preferred over `LinkedList` for queue operations
+- Space complexity is O(n) for storing n elements
+- Dynamic resizing ensures no overflow but adds occasional O(n) cost
