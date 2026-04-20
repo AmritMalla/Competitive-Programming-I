@@ -1,4 +1,4 @@
-# Competitive Programming & Data Structures Solutions
+# Data structure and algorithm problems
 
 A comprehensive collection of **265+** Java implementations covering fundamental data structures, algorithms, and competitive programming problems.
 
